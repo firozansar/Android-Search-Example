@@ -1,4 +1,4 @@
-package xyz.sahildave.widget;
+package info.firozansari.searchdemo;
 
 import android.animation.ValueAnimator;
 import android.app.Activity;

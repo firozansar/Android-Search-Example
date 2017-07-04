@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <view
-    class="xyz.sahildave.widget.SearchViewLayout"
+    class="info.firozansari.searchdemo.SearchViewLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/search_view_container"
     android:layout_width="match_parent"

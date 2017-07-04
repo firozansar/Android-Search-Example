@@ -11,8 +11,6 @@ import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 
-import xyz.sahildave.widget.SearchViewLayout;
-
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
