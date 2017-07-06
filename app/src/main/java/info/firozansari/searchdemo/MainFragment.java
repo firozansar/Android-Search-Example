@@ -6,7 +6,6 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 /**
  * Created by topcashback on 06/07/2017.
@@ -38,6 +37,7 @@ public class MainFragment extends Fragment {
         @Override
         public void onClick(View v) {
             if (getActivity() != null && getActivity() instanceof MainActivity) {
+                ((MainActivity) getActivity()).searchVisible(true);
                 ((MainActivity) getActivity()).replaceFragment(new PredictiveSearchFragment(), PredictiveSearchFragment.class.getSimpleName());
             }
         }

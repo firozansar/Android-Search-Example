@@ -8,14 +8,26 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import com.amsen.par.searchview.AutoCompleteSearchView;
+import com.amsen.par.searchview.prediction.OnPredictionClickListener;
+import com.amsen.par.searchview.prediction.Prediction;
+import com.amsen.par.searchview.prediction.view.DefaultPredictionPopupWindow;
+import com.amsen.par.searchview.util.ViewUtils;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+    private AutoCompleteSearchView searchView;
+    public MenuItem searchViewItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +71,48 @@ public class MainActivity extends AppCompatActivity {
             //Timber.e(new RuntimeException(), "Replace fragments with null newFragment parameter.");
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        searchViewItem = menu.findItem(R.id.action_search);
+        searchView = (AutoCompleteSearchView) searchViewItem.getActionView();
+        searchView.setUseDefaultProgressBar(true);
+        searchView.setUseDefaultPredictionPopupWindow(false);
+        searchView.setPredictionPopupWindow(new DefaultPredictionPopupWindow(MainActivity.this, new CustomPredictionAdapter()));
+
+        searchView.setOnPredictionClickListener(new OnPredictionClickListener() {
+
+            @Override
+            public void onClick(int position, Prediction prediction) {
+                Toast.makeText(getApplicationContext(), String.format("clicked [position:%d, value:%s, displayString:%s]", position, prediction.value, prediction.displayString), Toast.LENGTH_SHORT).show();
+
+                searchViewItem.collapseActionView();
+            }
+
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText.length() > 0) {
+                    searchView.showProgressBar();
+
+                    //fakeNetworkPredictions(newText);
+                }
+
+                return true;
+            }
+        });
+        return true;
+    }
+
 
 
     private void InitSearchLayout(Toolbar toolbar) {
@@ -110,5 +164,16 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "afterTextChanged: " + s);
             }
         });
+    }
+
+    public void searchVisible(boolean value){
+        if(value)
+        {
+            searchViewItem.setVisible(true);
+        }
+        else
+        {
+            searchViewItem.setVisible(false);
+        }
     }
 }
