@@ -56,13 +56,15 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical" >
 
-                    <TextView
+                    <EditText
                         android:id="@+id/search_box_collapsed_hint"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/search_collapsed_text_size"
+                        android:hint="search TopCashback"
                         android:textColor="@color/searchbox_text_color"
                         android:textColorHint="@color/searchbox_hint_text_color"
+                        android:background="@null"
                         android:gravity="center_vertical"/>
 
                 </LinearLayout>
