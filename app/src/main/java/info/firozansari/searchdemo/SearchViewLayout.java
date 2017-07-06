@@ -109,7 +109,7 @@ public class SearchViewLayout extends FrameLayout {
 
     @Override
     protected void onFinishInflate() {
-        mCollapsed = (ViewGroup) findViewById(R.id.search_box_collapsed);
+        mCollapsed = (ViewGroup) findViewById(R.id.search_box);
         mSearchIcon = findViewById(R.id.search_magnifying_glass);
         mCollapsedSearchBox = findViewById(R.id.search_box_start_search);
         mCollapsedHintView = (TextView) findViewById(R.id.search_box_collapsed_hint);
